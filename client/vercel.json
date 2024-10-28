@@ -2,31 +2,61 @@
   "version": 2,
   "builds": [
     {
-      "src": "index.html",
+      "src": "client/index.html",
       "use": "@vercel/static"
     },
     {
-      "src": "src/index.js",
+      "src": "client/src/index.js",
       "use": "@vercel/static"
     },
     {
-      "src": "src/style.css",
+      "src": "client/src/style.css",
       "use": "@vercel/static"
     },
     {
-      "src": "assets/images/logo.png",
+      "src": "client/assets/images/logo.png",
       "use": "@vercel/static"
     },
     {
-      "src": "public/favicon.ico",
+      "src": "client/public/favicon.ico",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "client/src/components/createNote.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "client/src/components/noteCard.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "client/src/utils/createElement.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "client/src/utils/dropdown.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "client/src/utils/formatDate.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "client/src/utils/uploadImage.js",
       "use": "@vercel/static"
     }
   ],
   "routes": [
-    { "src": "/favicon.ico", "dest": "/public/favicon.ico" },
-    { "src": "/src/style.css", "dest": "/src/style.css" },
-    { "src": "/src/index.js", "dest": "/src/index.js" },
-    { "src": "/assets/images/logo.png", "dest": "/assets/images/logo.png" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/favicon.ico", "dest": "/client/public/favicon.ico" },
+    { "src": "/style.css", "dest": "/client/src/style.css" },
+    { "src": "/index.js", "dest": "/client/src/index.js" },
+    { "src": "/assets/images/logo.png", "dest": "/client/assets/images/logo.png" },
+    { "src": "/components/createNote.js", "dest": "/client/src/components/createNote.js" },
+    { "src": "/components/noteCard.js", "dest": "/client/src/components/noteCard.js" },
+    { "src": "/utils/createElement.js", "dest": "/client/src/utils/createElement.js" },
+    { "src": "/utils/dropdown.js", "dest": "/client/src/utils/dropdown.js" },
+    { "src": "/utils/formatDate.js", "dest": "/client/src/utils/formatDate.js" },
+    { "src": "/utils/uploadImage.js", "dest": "/client/src/utils/uploadImage.js" },
+    { "src": "/(.*)", "dest": "/client/index.html" }
   ]
 }
