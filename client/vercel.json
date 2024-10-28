@@ -4,7 +4,29 @@
     {
       "src": "index.html",
       "use": "@vercel/static"
+    },
+    {
+      "src": "src/index.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "src/style.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "assets/images/logo.png",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/favicon.ico",
+      "use": "@vercel/static"
     }
   ],
-  "routes": [{ "src": "/(.*)", "dest": "/index.html" }]
+  "routes": [
+    { "src": "/favicon.ico", "dest": "/public/favicon.ico" },
+    { "src": "/src/style.css", "dest": "/src/style.css" },
+    { "src": "/src/index.js", "dest": "/src/index.js" },
+    { "src": "/assets/images/logo.png", "dest": "/assets/images/logo.png" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
