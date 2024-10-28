@@ -24,6 +24,10 @@
     {
       "src": "src/components/createNote.js",
       "use": "@vercel/static"
+    },
+    {
+      "src": "src/components/noteCard.js",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -32,6 +36,7 @@
     { "src": "/src/index.js", "dest": "/src/index.js" },
     { "src": "/assets/images/logo.png", "dest": "/assets/images/logo.png" },
     { "src": "/src/components/createNote.js", "dest": "/src/components/createNote.js" },
+    { "src": "/src/components/noteCard.js", "dest": "/src/components/noteCard.js" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
