@@ -14,7 +14,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "/assets/images/logo.png",
+      "src": "assets/images/logo.png",
       "use": "@vercel/static"
     },
     {
@@ -28,6 +28,22 @@
     {
       "src": "src/components/noteCard.js",
       "use": "@vercel/static"
+    },
+    {
+      "src": "src/utils/createElement.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "src/utils/dropdown.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "src/utils/formatDate.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "src/utils/uploadImage.js",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -37,6 +53,10 @@
     { "src": "/assets/images/logo.png", "dest": "/assets/images/logo.png" },
     { "src": "/src/components/createNote.js", "dest": "/src/components/createNote.js" },
     { "src": "/src/components/noteCard.js", "dest": "/src/components/noteCard.js" },
+    { "src": "/src/utils/createElement.js", "dest": "/src/utils/createElement.js" },
+    { "src": "/src/utils/dropdown.js", "dest": "/src/utils/dropdown.js" },
+    { "src": "/src/utils/formatDate.js", "dest": "/src/utils/formatDate.js" },
+    { "src": "/src/utils/uploadImage.js", "dest": "/src/utils/uploadImage.js" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
