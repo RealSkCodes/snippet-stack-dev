@@ -7,7 +7,7 @@ createNoteButton.addEventListener("click", async () => {
   try {
     // Use createNote and post the noteData to backend
     const noteData = await createNote(["hello"], document.body)
-    const response = await fetch("http://localhost:3000/api/v1/notes", {
+    const response = await fetch("https://snippet-stack-server.vercel.app/api/v1/notes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +27,7 @@ createNoteButton.addEventListener("click", async () => {
 const populateNoteCard = async () => {
   try {
     // Fetch notes data from backend and populate noteCard
-    const noteData = await fetch("http://localhost:3000/api/v1/notes/get")
+    const noteData = await fetch("https://snippet-stack-server.vercel.app/api/v1/notes/get")
     const response = await noteData.json()
     response.forEach(async (element) => {
       const { id, image_url, created_at, title, description } = element
