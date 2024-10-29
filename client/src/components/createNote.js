@@ -10,7 +10,20 @@ export const createNote = async (options, appendElement) => {
       if (!dialogModal) {
         const modalDialog = createElement("dialog", { id: "modal-dialog" })
         appendElement.append(modalDialog)
-        modalDialog.show()
+        modalDialog.showModal()
+
+        // Prevent clicks outside of dialog from closing it
+        modalDialog.addEventListener("click", (event) => {
+          const rect = modalDialog.getBoundingClientRect()
+          if (
+            event.clientX < rect.left ||
+            event.clientX > rect.right ||
+            event.clientY < rect.top ||
+            event.clientY > rect.bottom
+          ) {
+            event.stopPropagation()
+          }
+        })
 
         // Create div to contain image upload, new category button and category function dropdown
         const noteImgCateDropContainer = createElement("div", {
