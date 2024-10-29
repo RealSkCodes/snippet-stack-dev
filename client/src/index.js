@@ -44,7 +44,9 @@ const populateNoteCard = async () => {
 
 const getCategories = async () => {
   // Fetch unique category names from backend and populate navbar
-  const noteCategoriesData = await fetch("http://localhost:3000/api/v1/notes/categories")
+  const noteCategoriesData = await fetch(
+    "https://snippet-stack-server.vercel.app/api/v1/notes/categories"
+  )
   const response = await noteCategoriesData.json()
   response.forEach(async (element) => {
     let spanCategory = createElement("span", { innerHTML: element.category })
