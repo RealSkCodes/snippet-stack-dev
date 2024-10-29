@@ -31,6 +31,13 @@ app.get("/api/v1/notes/get", (req, res) => {
   })
 })
 
+app.get("/api/v1/notes/categories", (req, res) => {
+  pool.query(queries.getCategoriesQuery, (error, results) => {
+    if (error) throw error
+    res.status(200).json(results.rows)
+  })
+})
+
 app.use("/", (req, res) => {
   res.send("Server is running")
 })

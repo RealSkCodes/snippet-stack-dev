@@ -1,7 +1,9 @@
 import { createNote } from "./components/createNote.js"
 import { noteCard } from "./components/noteCard.js"
+import { createElement } from "./utils/createElement.js"
 const createNoteButton = document.getElementById("create-note-button")
 const notesContainer = document.getElementById("notes-container")
+const navbar = document.getElementById("header-bottom-container-navbar")
 
 createNoteButton.addEventListener("click", async () => {
   try {
@@ -18,6 +20,7 @@ createNoteButton.addEventListener("click", async () => {
     console.log("Status:", result.message)
     // Empty the notes container on submit button click and repopulate
     notesContainer.innerHTML = ""
+    navbar.innerHTML = ""
     await populateNoteCard()
   } catch (err) {
     console.log(`Error in POST noteData:${err}`)
@@ -33,9 +36,19 @@ const populateNoteCard = async () => {
       const { id, image_url, created_at, title, description } = element
       await noteCard(id, image_url, created_at, title, description)
     })
+    await getCategories()
   } catch (error) {
     console.log(error)
   }
 }
 
+const getCategories = async () => {
+  // Fetch unique category names from backend and populate navbar
+  const noteCategoriesData = await fetch("http://localhost:3000/api/v1/notes/categories")
+  const response = await noteCategoriesData.json()
+  response.forEach(async (element) => {
+    let spanCategory = createElement("span", { innerHTML: element.category })
+    navbar.append(spanCategory)
+  })
+}
 populateNoteCard()
