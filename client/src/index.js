@@ -82,6 +82,28 @@ const getNotesByCategory = async () => {
     }
   })
 }
+document.body.addEventListener("click", async (event) => {
+  // Delete notes by id from backend and repopulate noteCards
+  if (event.target && event.target.matches(".delete-card")) {
+    const id = event.target.id // ID of the note to delete
+    const confirmed = confirm("Are you sure you want to delete this note?")
+    if (!confirmed) return
+    const dialogs = document.querySelectorAll("dialog")
+    dialogs.forEach((dialog) => dialog.remove())
+    try {
+      const response = await fetch(`https://snippet-stack-server.vercel.app/api/v1/notes/${id}`, {
+        method: "DELETE",
+      })
+      const result = await response.json()
+      console.log(result.message)
+      notesContainer.innerHTML = ""
+      navbar.innerHTML = ""
+      await populateNoteCard()
+    } catch (error) {
+      console.error("Error deleting note:", error)
+    }
+  }
+})
 
 getNotesByCategory()
 populateNoteCard()

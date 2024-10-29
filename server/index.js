@@ -45,6 +45,13 @@ app.get("/api/v1/notes/category/:category", (req, res) => {
   })
 })
 
+app.delete("/api/v1/notes/:id", (req, res) => {
+  pool.query(queries.deleteCardDataQuery, [req.params.id], (error, results) => {
+    if (error) throw error
+    res.status(200).json({ message: "Note deleted successfully!" })
+  })
+})
+
 app.use("/", (req, res) => {
   res.send("Server is running")
 })

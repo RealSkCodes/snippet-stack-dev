@@ -59,8 +59,5 @@ export const noteCard = async (id, image, date, title, description) => {
       innerHTML: "Delete",
     })
     modalDialog.append(deleteCard)
-
-    // Modal close button
-    // deleteCardData(id, loadNotes, setupCategories)
   })
 }
