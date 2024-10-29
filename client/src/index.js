@@ -44,13 +44,44 @@ const populateNoteCard = async () => {
 
 const getCategories = async () => {
   // Fetch unique category names from backend and populate navbar
-  const noteCategoriesData = await fetch(
+  const noteCategories = await fetch(
     "https://snippet-stack-server.vercel.app/api/v1/notes/categories"
   )
-  const response = await noteCategoriesData.json()
+  const response = await noteCategories.json()
+  response.unshift({ category: "All" })
+  // console.log(response)
   response.forEach(async (element) => {
     let spanCategory = createElement("span", { innerHTML: element.category })
     navbar.append(spanCategory)
   })
 }
+
+const getNotesByCategory = async () => {
+  // Fetch notes by category name from backend and populate noteCard
+  navbar.addEventListener("click", async (event) => {
+    if (event.target.tagName === "SPAN" && event.target.innerHTML !== "All") {
+      const categoryName = event.target.innerHTML.trim()
+      try {
+        const noteCategoriesData = await fetch(
+          `https://snippet-stack-server.vercel.app/api/v1/notes/category/${categoryName}`
+        )
+        const response = await noteCategoriesData.json()
+        notesContainer.innerHTML = ""
+        response.forEach(async (element) => {
+          const { id, image_url, created_at, title, description } = element
+          await noteCard(id, image_url, created_at, title, description)
+        })
+      } catch (error) {
+        console.error("Error fetching notes by category:", error)
+      }
+    } else if (event.target.innerHTML === "All") {
+      // Populate notecard for "All" category
+      notesContainer.innerHTML = ""
+      navbar.innerHTML = ""
+      await populateNoteCard()
+    }
+  })
+}
+
+getNotesByCategory()
 populateNoteCard()
