@@ -108,5 +108,37 @@ document.body.addEventListener("click", async (event) => {
   }
 })
 
+document.body.addEventListener("click", async (event) => {
+  // Edit notes by id from backend and repopulate noteCards
+  if (event.target && event.target.matches(".edit-card")) {
+    const id = event.target.id // ID of the note to edit
+    const dialogs = document.querySelectorAll("dialog")
+    dialogs.forEach((dialog) => dialog.remove())
+    try {
+      navbar.innerHTML = ""
+      const categories = await getCategories()
+      categories.shift()
+      const noteData = await createNote(categories, document.body)
+      const response = await fetch(
+        `https://snippet-stack-server.vercel.app/api/v1/notes/edit/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(noteData),
+        }
+      )
+      const result = await response.json()
+      console.log(result.message)
+      notesContainer.innerHTML = ""
+      navbar.innerHTML = ""
+      await populateNoteCard()
+    } catch (error) {
+      console.error("Error editing note:", error)
+    }
+  }
+})
+
 getNotesByCategory()
 populateNoteCard()

@@ -52,6 +52,23 @@ app.delete("/api/v1/notes/:id", (req, res) => {
   })
 })
 
+app.put("/api/v1/notes/edit/:id", (req, res) => {
+  const { id } = req.params
+  const { image_url, category, title, description } = req.body
+
+  pool.query(
+    queries.editNotesQuery,
+    [image_url, category, title, description, id],
+    (error, results) => {
+      if (error) {
+        console.error("Error editing note:", error)
+        return res.status(500).json({ error: "Failed to edit note" })
+      }
+      res.status(200).json({ message: "Note updated successfully" })
+    }
+  )
+})
+
 app.use("/", (req, res) => {
   res.send("Server is running")
 })

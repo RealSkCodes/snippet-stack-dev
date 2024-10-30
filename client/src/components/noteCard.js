@@ -52,6 +52,13 @@ export const noteCard = async (id, image, date, title, description) => {
     modalDialog.append(descriptionLabel)
     const descriptionTextModal = createElement("span", { innerHTML: description })
     modalDialog.append(descriptionTextModal)
+    // Edit card and data
+    const editCard = createElement("button", {
+      id: `${id}`,
+      className: "edit-card",
+      innerHTML: "Edit",
+    })
+    modalDialog.append(editCard)
     // Delete card and data
     const deleteCard = createElement("button", {
       id: `${id}`,
