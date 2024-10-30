@@ -6,9 +6,12 @@ const notesContainer = document.getElementById("notes-container")
 const navbar = document.getElementById("header-bottom-container-navbar")
 
 createNoteButton.addEventListener("click", async () => {
+  // Fetch categories and use createNote and post the noteData to backend
   try {
-    // Use createNote and post the noteData to backend
-    const noteData = await createNote(["hello"], document.body)
+    navbar.innerHTML = ""
+    const categories = await getCategories()
+    categories.shift()
+    const noteData = await createNote(categories, document.body)
     const response = await fetch("https://snippet-stack-server.vercel.app/api/v1/notes", {
       method: "POST",
       headers: {
@@ -49,11 +52,11 @@ const getCategories = async () => {
   )
   const response = await noteCategories.json()
   response.unshift({ category: "All" })
-  // console.log(response)
   response.forEach(async (element) => {
     let spanCategory = createElement("span", { innerHTML: element.category })
     navbar.append(spanCategory)
   })
+  return response.map((element) => element.category)
 }
 
 const getNotesByCategory = async () => {
