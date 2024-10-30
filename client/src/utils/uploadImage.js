@@ -1,9 +1,5 @@
 export const getUploadImageLink = async (inputFile) => {
   const file = await inputFile.files[0]
-  if (!file) {
-    alert("No file selected for upload")
-    return
-  }
   const formData = new FormData()
   formData.append("file", file)
   formData.append("upload_preset", "doc_codepen_example")

@@ -55,18 +55,25 @@ app.delete("/api/v1/notes/:id", (req, res) => {
 app.put("/api/v1/notes/edit/:id", (req, res) => {
   const { id } = req.params
   const { image_url, category, title, description } = req.body
-
-  pool.query(
-    queries.editNotesQuery,
-    [image_url, category, title, description, id],
-    (error, results) => {
-      if (error) {
-        console.error("Error editing note:", error)
-        return res.status(500).json({ error: "Failed to edit note" })
-      }
-      res.status(200).json({ message: "Note updated successfully" })
+  const fields = []
+  const values = []
+  // Create fields and values dynamically
+  for (const [key, value] of Object.entries({ image_url, category, title, description })) {
+    if (value) {
+      fields.push(`${key} = $${fields.length + 1}`)
+      values.push(value)
     }
-  )
+  }
+  // Ensure at least one field is provided
+  if (!fields.length) {
+    return res.status(400).json({ error: "No fields to update" })
+  }
+  values.push(id)
+  const query = `UPDATE notes SET ${fields.join(", ")} WHERE id = $${values.length};`
+  pool.query(query, values, (error) => {
+    if (error) throw error
+    res.status(200).json({ message: "Note deleted successfully!" })
+  })
 })
 
 app.use("/", (req, res) => {

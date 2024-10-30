@@ -1,4 +1,5 @@
 import { createNote } from "./components/createNote.js"
+import { editNote } from "./components/editNote.js"
 import { noteCard } from "./components/noteCard.js"
 import { createElement } from "./utils/createElement.js"
 const createNoteButton = document.getElementById("create-note-button")
@@ -118,7 +119,7 @@ document.body.addEventListener("click", async (event) => {
       navbar.innerHTML = ""
       const categories = await getCategories()
       categories.shift()
-      const noteData = await createNote(categories, document.body)
+      const noteData = await editNote(categories, document.body)
       const response = await fetch(
         `https://snippet-stack-server.vercel.app/api/v1/notes/edit/${id}`,
         {
