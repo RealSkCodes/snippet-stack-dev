@@ -26,6 +26,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "src/components/editNote.js",
+      "use": "@vercel/static"
+    },
+    {
       "src": "src/components/noteCard.js",
       "use": "@vercel/static"
     },
@@ -52,6 +56,7 @@
     { "src": "/src/index.js", "dest": "/src/index.js" },
     { "src": "/assets/images/logo.png", "dest": "/assets/images/logo.png" },
     { "src": "/src/components/createNote.js", "dest": "/src/components/createNote.js" },
+    { "src": "/src/components/editNote.js", "dest": "/src/components/editNote.js" },
     { "src": "/src/components/noteCard.js", "dest": "/src/components/noteCard.js" },
     { "src": "/src/utils/createElement.js", "dest": "/src/utils/createElement.js" },
     { "src": "/src/utils/dropdown.js", "dest": "/src/utils/dropdown.js" },
